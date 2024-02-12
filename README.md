@@ -18,4 +18,3 @@ conda activate pinecone-upsert-error
 ```
 ./load_documents.sh
 ```
-
