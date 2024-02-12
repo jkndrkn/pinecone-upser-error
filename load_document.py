@@ -5,14 +5,11 @@ from langchain_community.document_loaders import TextLoader
 from langchain_community.embeddings import CohereEmbeddings 
 from langchain_community.vectorstores import Pinecone 
 
-# Try this later
-# from langchain_pinecone import Pinecone
-
 
 EMBEDDING_MODEL="embed-english-v3.0"
 INDEX_NAME = "answers-dev-jde-test"
 TRIALS = 50
-TEXT_PATH = "my-text.txt"
+TEXT_PATH = "my_text.txt"
 
 loader = TextLoader(TEXT_PATH)
 documents = loader.load()
