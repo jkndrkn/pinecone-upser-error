@@ -19,7 +19,9 @@ Code sample that exposes an error that happens when using Cohere embeddings with
    conda activate pinecone-upsert-error
    ```
 
-2. Edit your `config.sh` to point to the correct Pinecone and Cohere credentials
+4. Create a Pinecone index with 1024 dimensions and cosine metric for use with Cohere embeddings
+
+5. Edit your `config.sh` to point to the correct Pinecone and Cohere credentials
 
 # Testing
 
