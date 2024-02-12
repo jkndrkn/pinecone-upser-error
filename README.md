@@ -2,14 +2,22 @@
 
 Code sample that exposes an error that happens when using Cohere embeddings with the LangChain Pinecone vectorstore.
 
+
 # Installation
 
-1. Install python, pip, and necessary dependencies using conda
+1. Install Miniconda: https://docs.anaconda.com/free/miniconda/index.html
 
-```
-./install.sh
-conda activate pinecone-upsert-error
-```
+2. Install `python`, `pip`, and Python packages
+
+   ```
+   ./install.sh
+   ```
+
+3. Activate your Conda environment:
+
+   ```
+   conda activate pinecone-upsert-error
+   ```
 
 2. Edit your `config.sh` to point to the correct Pinecone and Cohere credentials
 
