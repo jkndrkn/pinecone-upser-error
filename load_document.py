@@ -6,7 +6,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Pinecone
 
 EMBEDDING_MODEL = "embed-english-v3.0"
-INDEX_NAME = "answers-dev-jde-test-768"
+INDEX_NAME = environ["PINECONE_INDEX"]
 TRIALS = 50
 TEXT_PATH = "my_text.txt"
 
