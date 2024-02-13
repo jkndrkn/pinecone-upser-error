@@ -56,20 +56,20 @@ Traceback (most recent call last):
     self.sock = sock = self._new_conn()
   File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
     raise NameResolutionError(self.host, self, e) from e
-urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f7d20580430>: Failed to resolve 'answers-dev-jde-test-REDACTED.svc.us-east-1-aws.pinecone.io' ([Errno 8] nodename nor servname provided, or not known)
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7fe2590b3e80>: Failed to resolve 'answers-dev-jde-test-768-REDACTED.svc.us-east-1-aws.pinecone.io' ([Errno 8] nodename nor servname provided, or not known)
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/Users/jeriksen/bamboohr/ai-labs/pinecone-upsert-error/load_document.py", line 28, in <module>
-    Pinecone.from_documents(docs, embedder, index_name=INDEX_NAME)
+  File "/Users/jeriksen/bamboohr/ai-labs/pinecone-upsert-error/load_document.py", line 23, in <module>
+    PineconeStore.from_documents(docs, embedder, index_name=INDEX_NAME)
   File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/langchain_core/vectorstores.py", line 508, in from_documents
     return cls.from_texts(texts, embedding, metadatas=metadatas, **kwargs)
-  File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/langchain_pinecone/vectorstores.py", line 434, in from_texts
+  File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/langchain_community/vectorstores/pinecone.py", line 434, in from_texts
     pinecone.add_texts(
-  File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/langchain_pinecone/vectorstores.py", line 166, in add_texts
+  File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/langchain_community/vectorstores/pinecone.py", line 157, in add_texts
     [res.get() for res in async_res]
-  File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/langchain_pinecone/vectorstores.py", line 166, in <listcomp>
+  File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/langchain_community/vectorstores/pinecone.py", line 157, in <listcomp>
     [res.get() for res in async_res]
   File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/multiprocessing/pool.py", line 774, in get
     raise self._value
@@ -99,5 +99,5 @@ Traceback (most recent call last):
     retries = retries.increment(
   File "/Users/jeriksen/opt/anaconda3/envs/pinecone-upsert-error/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='answers-dev-jde-test-REDACTED.svc.us-east-1-aws.pinecone.io', port=443): Max retries exceeded with url: /vectors/upsert (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f7d20580430>: Failed to resolve 'answers-dev-jde-test-REDACTED.svc.us-east-1-aws.pinecone.io' ([Errno 8] nodename nor servname provided, or not known)"))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='answers-dev-jde-test-768-REDACTED.svc.us-east-1-aws.pinecone.io', port=443): Max retries exceeded with url: /vectors/upsert (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7fe2590b3e80>: Failed to resolve 'answers-dev-jde-test-768-REDACTED.svc.us-east-1-aws.pinecone.io' ([Errno 8] nodename nor servname provided, or not known)"))
 ```
