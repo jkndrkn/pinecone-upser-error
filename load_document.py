@@ -3,7 +3,7 @@ from os import environ
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Pinecone as PineconeStore
+from langchain_pinecone import Pinecone as PineconeStore
 
 INDEX_NAME = environ["PINECONE_INDEX"]
 TRIALS = 50
