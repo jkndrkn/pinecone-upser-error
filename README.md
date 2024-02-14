@@ -101,3 +101,36 @@ Traceback (most recent call last):
     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
 urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='answers-dev-jde-test-768-REDACTED.svc.us-east-1-aws.pinecone.io', port=443): Max retries exceeded with url: /vectors/upsert (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7fe2590b3e80>: Failed to resolve 'answers-dev-jde-test-768-REDACTED.svc.us-east-1-aws.pinecone.io' ([Errno 8] nodename nor servname provided, or not known)"))
 ```
+
+# Solution
+
+It appears that Pinecone was requiring more file descriptors than were available on my system.
+
+During experiments on a different machine I came across the below error. It looks like my system
+was configured so that `ulimit -n` returns 256. Setting `ulimit -n 2048` makes the `NameResolutionError`
+go away.
+
+```
+Traceback (most recent call last):
+  File "/Users/jderiksen/src/pinecone-upsert-error/load_document.py", line 23, in <module>
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/langchain_core/vectorstores.py", line 508, in from_documents
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/langchain_pinecone/vectorstores.py", line 434, in from_texts
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/langchain_pinecone/vectorstores.py", line 155, in add_texts
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/langchain_pinecone/vectorstores.py", line 156, in <listcomp>
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/utils/error_handling.py", line 10, in inner_func
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/data/index.py", line 171, in upsert
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/data/index.py", line 192, in _upsert_batch
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/core/client/api_client.py", line 771, in __call__
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/core/client/api/vector_operations_api.py", line 951, in __upsert
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/core/client/api_client.py", line 833, in call_with_http_info
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/core/client/api_client.py", line 416, in call_api
+  File "/Users/jderiksen/miniconda3/lib/python3.11/site-packages/pinecone/core/client/api_client.py", line 102, in pool
+  File "/Users/jderiksen/miniconda3/lib/python3.11/multiprocessing/pool.py", line 930, in __init__
+  File "/Users/jderiksen/miniconda3/lib/python3.11/multiprocessing/pool.py", line 196, in __init__
+  File "/Users/jderiksen/miniconda3/lib/python3.11/multiprocessing/context.py", line 113, in SimpleQueue
+  File "/Users/jderiksen/miniconda3/lib/python3.11/multiprocessing/queues.py", line 346, in __init__
+  File "/Users/jderiksen/miniconda3/lib/python3.11/multiprocessing/context.py", line 68, in Lock
+  File "/Users/jderiksen/miniconda3/lib/python3.11/multiprocessing/synchronize.py", line 167, in __init__
+  File "/Users/jderiksen/miniconda3/lib/python3.11/multiprocessing/synchronize.py", line 57, in __init__
+OSError: [Errno 24] Too many open files
+```
