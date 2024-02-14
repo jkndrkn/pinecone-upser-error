@@ -5,7 +5,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_pinecone import Pinecone as PineconeStore
-from pinecone import Pinecone as PineconeClient
+from pinecone.grpc import PineconeGRPC as PineconeClient
 
 INDEX_NAME = environ["PINECONE_INDEX"]
 TRIALS = 50
